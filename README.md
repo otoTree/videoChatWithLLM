@@ -20,7 +20,9 @@ Using model: internlm xcomposer2-vl-7b
 
 
 # Todo
-· 实现asr和tts功能
+· 优化视频对话流程
+
+· 加入记忆功能
 
 · 实现表情功能，具象化LLM
 
