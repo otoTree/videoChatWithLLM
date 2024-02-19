@@ -39,7 +39,7 @@ cap = cv2.VideoCapture(0)
 
 
 def get_frame():
-    global cap  # 因为我们在外部定义cap，所以需要使用global关键字
+    global cap  
 
     # 读取一帧
     ret, frame = cap.read()
@@ -77,6 +77,7 @@ def main(page: ft.Page):
             # 暂停1秒，然后继续获取下一个帧
             time.sleep(0.015)
 
+    
     def send_click(e):
         lv.controls.append(card('user', new_message.value))
 
@@ -105,6 +106,8 @@ def main(page: ft.Page):
         ft.Row(controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)],
                alignment=ft.MainAxisAlignment.CENTER, )
     )
+    
+    #启动摄像头实时采集
     get_video()
 
 
