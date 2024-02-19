@@ -19,5 +19,29 @@ Real time images are captured through cameras, and the last frame is captured du
 Using model: internlm xcomposer2-vl-7b
 
 
+# Todo
+· 实现asr和tts功能
+
+· 实现表情功能，具象化LLM
+
+· 模型微调，降低模型功耗，加速模型生成速度
+
+· 实在不行就炼一个新的视频生成模型（看好sora）
+
+# Todo
+
+·Implement ASR and TTS functions
+
+
+
+·Implement facial expression function and concretize LLM
+
+
+
+·Model fine-tuning to reduce model power consumption and accelerate model generation speed
+
+
+
+·If it really doesn't work, then refine a new video generation model (optimistic about Sora)
 
 ![test](pic/test.jpg)
