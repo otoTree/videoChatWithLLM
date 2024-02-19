@@ -3,9 +3,13 @@ import base64
 import flet as ft
 import time
 import connect
+from apiStore import *
+import asr
+
 chat = connect.Chat()
 
-#卡片组件
+
+# 卡片组件
 def card(role, content):
     if role == 'user':
         icon = 'ft.icons.BEACH_ACCESS'
@@ -39,7 +43,7 @@ cap = cv2.VideoCapture(0)
 
 
 def get_frame():
-    global cap  
+    global cap  # 因为我们在外部定义cap，所以需要使用global关键字
 
     # 读取一帧
     ret, frame = cap.read()
@@ -61,8 +65,10 @@ def get_frame():
     return base64_frame
 
 
-def main(page: ft.Page):
+video_control = 0
 
+
+def main(page: ft.Page):
     def get_video():
         while True:
             # 获取一个新帧
@@ -77,37 +83,74 @@ def main(page: ft.Page):
             # 暂停1秒，然后继续获取下一个帧
             time.sleep(0.015)
 
-    
     def send_click(e):
         lv.controls.append(card('user', new_message.value))
 
         page.update()
 
-        chat.chat(get_frame(),new_message.value)
+        chat.chat(get_frame(), new_message.value)
 
         print(chat.message)
 
         lv.controls.append(card(chat.message[-1]['role'], chat.message[-1]['content']))
-        chat.message = []
+
         new_message.value = ""
         page.update()
 
+    def close(e):
+        global video_control
+        video_control = 0
+        print("关闭视频")
+        page.remove(close_btn)
+
+    def videoChat(e):
+        global video_control
+        video_control = 1
+        page.add(close_btn)
+        while True:
+            if video_control == 0:
+                break
+
+            speech()#录音
+
+            new_VoiceMessage = asr.main('00.wav') #语音识别
+
+            lv.controls.append(card('user', new_VoiceMessage))
+
+            if new_VoiceMessage == None:
+                new_VoiceMessage=' '
+
+            page.update()
+            print(new_VoiceMessage)
+
+            chat.chat(get_frame(), new_VoiceMessage)
+
+            tts(chat.message[-1]['content']) #语音合成
+
+            audio_playback('00.mp3')#播放语音
+
+            lv.controls.append(card(chat.message[-1]['role'], chat.message[-1]['content']))
+            page.update()
 
     base64_frame = get_frame()
-    img = ft.Image(src_base64=base64_frame,width=300,height=300)
+    img = ft.Image(src_base64=base64_frame, width=300, height=300)
 
-    lv = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True,height=500)
+    lv = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True, height=500)
 
     new_message = ft.TextField(hint_text="Please enter text here")
     new_message.border_color = '#3C3C3C'
 
+    videoChat = ft.ElevatedButton("videoChat", on_click=videoChat)
+    send = ft.ElevatedButton("Send", on_click=send_click)
+    close_btn=ft.ElevatedButton("close", on_click=close)
     page.add(
-        ft.Row(controls=[img,lv],alignment=ft.MainAxisAlignment.CENTER,),
-        ft.Row(controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)],
-               alignment=ft.MainAxisAlignment.CENTER, )
+        ft.Row(controls=[img, lv], alignment=ft.MainAxisAlignment.CENTER, ),
+        ft.Row(controls=[videoChat,
+                         new_message,
+                         send],
+               alignment=ft.MainAxisAlignment.CENTER, ),
+
     )
-    
-    #启动摄像头实时采集
     get_video()
 
 
