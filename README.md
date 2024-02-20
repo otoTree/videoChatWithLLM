@@ -47,5 +47,7 @@ Using model: internlm xcomposer2-vl-7b
 ·If it really doesn't work, then refine a new video generation model (optimistic about Sora)
 
 # 测试/test
-![video]([https://iaspooaf477.feishu.cn/docx/Ms8mdjrVzoLiFExZzAmcZmnMn9g?from=from_copylink](https://iaspooaf477.feishu.cn/docx/Ms8mdjrVzoLiFExZzAmcZmnMn9g#JUOIdfrOaowSdSxRgAHcTiccnCe)https://iaspooaf477.feishu.cn/docx/Ms8mdjrVzoLiFExZzAmcZmnMn9g#JUOIdfrOaowSdSxRgAHcTiccnCe)
+
+[测试视频/test video](https://iaspooaf477.feishu.cn/docx/Ms8mdjrVzoLiFExZzAmcZmnMn9g?from=from_copylink)
+
 ![test](pic/test.jpg)
