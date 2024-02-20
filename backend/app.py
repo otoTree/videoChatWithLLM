@@ -29,15 +29,22 @@ history=[]
 #聊天和LLM
 def chat(text):
     global history
+    ans={'content':'','emoji':''}
     image = '0.png'
-    query = '<ImageHere>'+text
+    query=f'''
+    <ImageHere> 是你看到的图像
+    <|System|>:你是人类，你拥有视觉能力，你可以通过生成函数操控你的躯体和视野，你的名字是小黄，当前环境：是你看到的图像。
+    <|User|>:{text}
+    <|Bot|>:
+    '''
+    
     print(query)
     response, history = model.chat(query=query, image=image, tokenizer= tokenizer,history=[])
     return response
 
 #b64解码
 def decode(imgb64):
-    # Base64编码的图片数据的字符串
+    # 假设b64_string是包含Base64编码的图片数据的字符串
     b64_string = imgb64
 
     # 对字符串进行解码
