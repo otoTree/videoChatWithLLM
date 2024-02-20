@@ -20,6 +20,7 @@ Using model: internlm xcomposer2-vl-7b
 
 
 # Todo
+
 · 优化视频对话流程
 
 · 加入记忆功能
@@ -32,7 +33,11 @@ Using model: internlm xcomposer2-vl-7b
 
 # Todo
 
-·Implement ASR and TTS functions
+·Optimize video dialogue process
+
+
+
+·Add memory function
 
 
 
@@ -45,6 +50,7 @@ Using model: internlm xcomposer2-vl-7b
 
 
 ·If it really doesn't work, then refine a new video generation model (optimistic about Sora)
+
 
 # 测试/test
 
