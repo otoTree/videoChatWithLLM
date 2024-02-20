@@ -51,8 +51,8 @@ def speech():
 
 def tts(text):
     # 填写平台申请的appid, access_token以及cluster
-    appid = "3430080075"
-    access_token = "I3o5O7fiW-10KigZopBkUKjl8cTZdXdD"
+    appid = "appid"
+    access_token = "access_token"
     cluster = "volcano_tts"
 
     voice_type = "BV700_V2_streaming"
