@@ -30,11 +30,46 @@ history=[]
 def chat(text):
     global history
     ans={'content':'','emoji':''}
+    system='''
+    function=[
+    # 移动函数
+    {'name': 'move',
+     'description': 'Move in any direction',
+     'parameters': {'type': 'object',
+                    'properties':
+                        {'step': {'type': 'int', 'description': 'Moving distance'},
+                         'direction': {'type': 'string', 'description': 'Direction of movement'},
+                         'required': ['step','direction']}}},
+
+    # 转动函数
+    {'name': 'turn',
+     'description': 'Rotate in any direction',
+     'parameters': {'type': 'object',
+                    'properties':
+                        {'angle': {'type': 'int', 'description': 'Rotate at a certain angle'},
+                         'direction': {'type': 'string', 'description': 'Direction of rotation'},
+                         'required': ['angle','direction']}}},
+
+    # other函数
+    {'name': 'speak',
+     'description': "Calling up built-in speakers to emit sound",
+     'parameters': {'type': 'object',
+                    'properties': {'input': {'type': 'string', 'description': 'What you say'}},
+                    'required': ['input']}},
+    {'name': 'None',
+     'description': "当用户输入内容无效时调用这个函数",
+     'parameters': None}
+]
+    '''
+    other='''
+    You should only respond in JSON format as described below{'function': '', 'parameters': '', 'thought': 'Your thoughts on the task', 'process': 'enum[start,end,ongoing]'}The output is just pure JSON format,with no other descripions
+    '''
     image = '0.png'
     query=f'''
-    <ImageHere> 是你看到的图像
-    <|System|>:你是人类，你拥有视觉能力，你可以通过生成函数操控你的躯体和视野，你的名字是小黄，当前环境：是你看到的图像。
+    <ImageHere>是你看到的图像
+    <|System|>:你是人类，你拥有视觉能力，你可以通过生成函数操控你的躯体和视野，你的名字是小黄，当前环境：是你看到的图像。{system}
     <|User|>:{text}
+    {other}
     <|Bot|>:
     '''
     
