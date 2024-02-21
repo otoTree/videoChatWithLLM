@@ -32,7 +32,6 @@ def chat(text):
     ans={'content':'','emoji':''}
     system='''
     function=[
-    # 移动函数
     {'name': 'move',
      'description': 'Move in any direction',
      'parameters': {'type': 'object',
@@ -40,8 +39,6 @@ def chat(text):
                         {'step': {'type': 'int', 'description': 'Moving distance'},
                          'direction': {'type': 'string', 'description': 'Direction of movement'},
                          'required': ['step','direction']}}},
-
-    # 转动函数
     {'name': 'turn',
      'description': 'Rotate in any direction',
      'parameters': {'type': 'object',
@@ -49,8 +46,6 @@ def chat(text):
                         {'angle': {'type': 'int', 'description': 'Rotate at a certain angle'},
                          'direction': {'type': 'string', 'description': 'Direction of rotation'},
                          'required': ['angle','direction']}}},
-
-    # other函数
     {'name': 'speak',
      'description': "Calling up built-in speakers to emit sound",
      'parameters': {'type': 'object',
